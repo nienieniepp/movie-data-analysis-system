@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">C1. High-Rated Movie Recommendation Report</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Minimum Rating (Default 8.0)</label>
+        <input type="text" name="min_rating" class="form-control" value="8.0">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Minimum Number of Votes (Default 50)</label>
+        <input type="text" name="min_votes" class="form-control" value="50">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Language Code (Optional, e.g. en / zh / ja)</label>
+        <input type="text" name="lang" class="form-control" placeholder="Leave blank for all languages">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Generate English Report</button>
+    <a href="{{ url_for('rec_menu') }}" class="btn btn-secondary">Return to C Menu</a>
+</form>
+{% endblock %}

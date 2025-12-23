@@ -1,0 +1,254 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+/* 主页面专属样式 */
+.dashboard-container {
+    padding: 2rem 0;
+}
+
+.main-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.main-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background: #2c3e50;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 60%);
+}
+
+.card-header h2 {
+    position: relative;
+    z-index: 2;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+
+.feature-card {
+    background: white !important;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: #333 !important;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    /* 移除可能的默认激活状态样式 */
+    outline: none;
+    box-shadow: none !important;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #3498db;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover::before {
+    transform: scaleX(1);
+}
+
+.feature-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08) !important;
+    color: #2c3e50 !important;
+    border-color: transparent;
+}
+
+.feature-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #3498db !important; /* 强制图标颜色统一 */
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.feature-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.feature-desc {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.features-grid .feature-card {
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+/* 错开动画时间 */
+.features-grid .feature-card:nth-child(1) { animation-delay: 0.1s; }
+.features-grid .feature-card:nth-child(2) { animation-delay: 0.2s; }
+.features-grid .feature-card:nth-child(3) { animation-delay: 0.3s; }
+.features-grid .feature-card:nth-child(4) { animation-delay: 0.4s; }
+.features-grid .feature-card:nth-child(5) { animation-delay: 0.5s; }
+.features-grid .feature-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .features-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div class="dashboard-container">
+    <div class="main-card">
+        <div class="card-header">
+            <h2>Welcome to the Movie Business Automated Content Management System</h2>
+        </div>
+        <div class="card-body">
+            <p class="text-center mb-4">Please select a functional module to enter:</p>
+
+            <div class="features-grid">
+                <a href="{{ url_for('overview') }}" class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">A. Overall Data Overview</div>
+                    <p class="feature-desc">View system-wide data statistics and popular movie examples</p>
+                </a>
+
+                <a href="{{ url_for('hot_menu') }}" class="feature-card">
+                    <div class="feature-icon">🔥</div>
+                    <div class="feature-title">B. Popular Movies Statistics and Analysis</div>
+                    <p class="feature-desc">Generate Top N popular movies reports and annual summaries</p>
+                </a>
+
+                <a href="{{ url_for('rec_menu') }}" class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <div class="feature-title">C. Content Recommendation and Selection Decision</div>
+                    <p class="feature-desc">Get recommendations for high-rated and potential movies</p>
+                </a>
+
+                <a href="{{ url_for('structure_menu') }}" class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <div class="feature-title">D. Content Structure and Time Period Performance</div>
+                    <p class="feature-desc">Statistics by language and time interval performance analysis</p>
+                </a>
+
+                <a href="{{ url_for('reports_menu') }}" class="feature-card">
+                    <div class="feature-icon">📑</div>
+                    <div class="feature-title">E. Report and Template Management</div>
+                    <p class="feature-desc">View historical reports and manage templates, SQL queries</p>
+                </a>
+
+                <!-- 确保F选项无任何额外类名，仅保留feature-card -->
+                <a href="{{ url_for('admin_menu') }}" class="feature-card" style="border: 1px solid #e9ecef !important;">
+                    <div class="feature-icon">⚙️</div>
+                    <div class="feature-title">F. System Platform and Data Maintenance</div>
+                    <p class="feature-desc">Database management and movie data maintenance functions</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// 添加交互效果
+document.addEventListener('DOMContentLoaded', function() {
+    const featureCards = document.querySelectorAll('.feature-card');
+
+
+    featureCards.forEach(card => {
+        card.style.transform = '';
+        card.style.boxShadow = '';
+        card.classList.remove('active', 'highlight');
+    });
+
+    featureCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px)';
+            this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.08)';
+        });
+
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = '';
+            this.style.boxShadow = '';
+        });
+
+        card.addEventListener('click', function(e) {
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+        });
+    });
+
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 10) {
+            navbar.classList.add('shadow-md');
+            navbar.classList.add('bg-dark/95');
+            navbar.classList.remove('bg-dark');
+        } else {
+            navbar.classList.remove('shadow-md');
+            navbar.classList.remove('bg-dark/95');
+            navbar.classList.add('bg-dark');
+        }
+    });
+});
+</script>
+{% endblock %}

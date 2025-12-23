@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>C3. Movie Search Results</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5>Search Criteria</h5>
+        <p>
+            Title Keyword: {{ params.title_keyword or 'Not set' }} |
+            Language: {{ params.language or 'Not set' }} |
+            Year: {{ params.release_year or 'Not set' }} |
+            Rating Range: {{ params.min_rating }}-{{ params.max_rating }}
+        </p>
+    </div>
+</div>
+
+{% if stats %}
+<div class="card mb-4">
+    <div class="card-body">
+        <h5>Search Statistics</h5>
+        <p>Number of matching movies: <strong>{{ stats.movie_count }}</strong></p>
+        <p>Average Rating: <strong>
+            {{ "%.2f"|format(stats.avg_rating) if stats and stats.avg_rating is not none else "N/A" }}
+        </strong></p>
+        <p>Average Popularity: <strong>
+            {{ "%.2f"|format(stats.avg_popularity) if stats and stats.avg_popularity is not none else "N/A" }}
+        </strong></p>
+    </div>
+</div>
+{% endif %}
+
+{% if movies %}
+<div class="card">
+    <div class="card-body">
+        <h5>Search Results List</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Rating</th>
+                    <th>Popularity</th>
+                    <th>Language</th>
+                    <th>Release Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in movies %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ m["title"] }}</td>
+                    <td>{{ "%.1f"|format(m["vote_average"]) if m["vote_average"] else "N/A" }}</td>
+                    <td>{{ "%.1f"|format(m["popularity"]) if m["popularity"] else "N/A" }}</td>
+                    <td>{{ m["original_language"] or "-" }}</td>
+                    <td>{{ m["release_year"] or "-" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endif %}
+
+<a href="{{ url_for('movie_search') }}" class="btn btn-secondary mt-3">Return to Search Page</a>
+{% endblock %}

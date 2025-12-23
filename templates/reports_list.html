@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">List of Historically Generated Reports</h2>
+
+<table class="table table-sm table-striped align-middle">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Generation Time</th>
+        <th>Format</th>
+        <th>Template Name</th>
+        <th>Parameter Description</th>
+        <th>Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for r in reports %}
+        <tr>
+            <td>{{ r['id'] }}</td>
+            <td>{{ r['generated_at'] }}</td>
+            <td>{{ r['format'] }}</td>
+            <td>{{ r['template_name'] or 'N/A' }}</td>
+            <td>{{ r['parameters'] }}</td>
+            <td>
+                <a href="{{ url_for('report_detail', report_id=r['id']) }}" class="btn btn-sm btn-primary">
+                    View Details
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

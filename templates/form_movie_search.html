@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">C3. Advanced Movie Search</h2>
+
+<form method="post" class="card p-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Title Keyword (Fuzzy Match)</label>
+            <input type="text" name="title_keyword" class="form-control" 
+                   value="{{ params.title_keyword or '' }}" placeholder="e.g.: matrix">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Language Code</label>
+            <input type="text" name="language" class="form-control" 
+                   value="{{ params.language or '' }}" placeholder="e.g.: en/zh">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Release Year</label>
+            <input type="number" name="release_year" class="form-control" 
+                   value="{{ params.release_year or '' }}" placeholder="e.g.: 2023">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Minimum Rating</label>
+            <input type="number" step="0.1" min="0" max="10" name="min_rating" 
+                   value="{{ params.min_rating or 0 }}">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Maximum Rating</label>
+            <input type="number" step="0.1" min="0" max="10" name="max_rating" 
+                   value="{{ params.max_rating or 10 }}">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Minimum Popularity</label>
+            <input type="number" name="min_popularity" 
+                   value="{{ params.min_popularity or 0 }}">
+        </div>
+
+        <div class="col-md-3">
+            <label class="form-label">Maximum Display Count</label>
+            <input type="number" name="limit" value="{{ params.limit or 20 }}" min="1" max="100">
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Search Movies</button>
+        <a href="{{ url_for('rec_menu') }}" class="btn btn-secondary">Return to C Menu</a>
+    </div>
+</form>
+{% endblock %}

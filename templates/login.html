@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-vh-100 d-flex align-items-center justify-content-center py-4">
+    <div class="w-100 max-w-md">
+        <div class="text-center mb-4">
+            <h1 class="h3 mb-0">Movie Business Report System</h1>
+            <p class="text-muted mt-1">Please log in to your account</p>
+        </div>
+        
+        <div class="card shadow-sm">
+            <div class="card-body p-5">
+                <form method="post" class="needs-validation" novalidate>
+                    <div class="mb-4">
+                        <label for="username" class="form-label">Username</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.672c.18.18.353.346.53.514 1.149-1.184 2.763-2.457 4.568-3.89 1.805 1.433 3.418 2.706 4.568 3.89.178-.168.35-.335.53-.515A7 7 0 0 0 8 1z"/>
+                                </svg>
+                            </span>
+                            <input type="text" class="form-control" id="username" name="username" required 
+                                   placeholder="Please enter username" autocomplete="username">
+                            <div class="invalid-feedback">Please enter username</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-1">
+                            <label for="password" class="form-label">Password</label>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                    <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                                </svg>
+                            </span>
+                            <input type="password" class="form-control" id="password" name="password" required 
+                                   placeholder="Please enter password" autocomplete="current-password">
+                            <div class="invalid-feedback">Please enter password</div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-100 btn btn-primary py-2">Log In</button>
+                </form>
+            </div>
+            
+            <div class="card-footer bg-transparent border-top text-center py-3">
+                Don't have an account yet? <a href="{{ url_for('register') }}" class="text-primary fw-medium">Register now</a>
+            </div>
+        </div>
+        
+        <p class="mt-5 mb-3 text-center text-muted">© 2025 Movie Business Report System</p>
+    </div>
+</div>
+{% endblock %}

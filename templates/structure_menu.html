@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- 标题区域强化强化 -->
+<div class="mb-6 bg-gradient-to-r from-info/5 to-purple/5 p-4 rounded-3 shadow-sm">
+    <div class="d-flex align-items-center gap-3">
+        <div class="bg-white p-3 rounded-circle shadow-sm">
+            <i class="bi bi-bar-chart-line text-info fs-2"></i>
+        </div>
+        <div>
+            <h2 class="mb-1 fw-bold">D. Content Structure and Time Period Performance Analysis</h2>
+            <p class="text-muted small">Analyze content structure characteristics and time period performance patterns through multi-dimensional data statistics</p>
+        </div>
+    </div>
+</div>
+
+<!-- 功能卡片区域 -->
+<div class="row gap-6">
+    <!-- 按语言统计 -->
+    <div class="col-md-6">
+        <a href="{{ url_for('language_stats') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-info rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <!-- 卡片头部 -->
+                <div class="card-header bg-info/10 border-bottom border-info">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-globe text-info fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">1. Statistics of movie count and average rating by language</h5>
+                    </div>
+                </div>
+
+                <!-- 卡片内容 -->
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <p class="text-muted">
+                            Count the total number, proportion and average rating of movies by language category, generate visual comparison charts, and quickly grasp the quality distribution of content in different languages.
+                        </p>
+                    </div>
+
+                    <!-- 功能亮点标签 -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-info text-white px-3 py-1">
+                            <i class="bi bi-pie-chart me-1"></i> Proportion analysis
+                        </span>
+                        <span class="badge bg-info text-white px-3 py-1">
+                            <i class="bi bi-star me-1"></i> Rating comparison
+                        </span>
+                        <span class="badge bg-info text-white px-3 py-1">
+                            <i class="bi bi-bar-chart me-1"></i> Chart visualization
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 底部引导 -->
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-info fw-medium">View details <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 时间区间统计 -->
+    <div class="col-md-6">
+        <a href="{{ url_for('period_stats') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-purple rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <!-- 卡片头部 -->
+                <div class="card-header bg-purple/10 border-bottom border-purple">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-calendar-range text-purple fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">2. Statistics of movie count and performance in specified time intervals</h5>
+                    </div>
+                </div>
+
+                <!-- 卡片内容 -->
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <p class="text-muted">
+                            Customize the time range (such as quarterly/annual), count the number of movies released in the interval, average rating and popularity trends, and support time period comparison analysis.
+                        </p>
+                    </div>
+
+                    <!-- 功能亮点标签 -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-purple text-white px-3 py-1">
+                            <i class="bi bi-calendar-check me-1"></i> Interval customization
+                        </span>
+                        <span class="badge bg-purple text-white px-3 py-1">
+                            <i class="bi bi-trending-up me-1"></i> Trend tracking
+                        </span>
+                        <span class="badge bg-purple text-white px-3 py-1">
+                            <i class="bi bi-clock-history me-1"></i> Time period comparison
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 底部引导 -->
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-purple fw-medium">View details <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- 底部装饰 -->
+<div class="mt-8 flex items-center">
+    <div class="flex-grow-1 h-px bg-info/20"></div>
+    <div class="mx-4 bg-white p-2 rounded-full shadow-sm">
+        <i class="bi bi-graph-up text-purple/70"></i>
+    </div>
+    <div class="flex-grow-1 h-px bg-purple/20"></div>
+</div>
+{% endblock %}

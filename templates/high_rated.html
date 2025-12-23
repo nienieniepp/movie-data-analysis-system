@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>C1. High-Rated Movie Recommendation Report</h2>
+
+<div class="card">
+    <form method="post">
+        <div class="form-row">
+            <label>Minimum Rating Threshold:</label>
+            <input type="number" step="0.1" name="min_rating" value="{{ params.min_rating or 8.0 }}">
+        </div>
+        <div class="form-row">
+            <label>Optional: Restrict Language (e.g. en):</label>
+            <input type="text" name="language" value="{{ params.language or '' }}">
+        </div>
+        <div class="form-row">
+            <label>Maximum Display Count:</label>
+            <input type="number" name="limit" value="{{ params.limit or 20 }}">
+        </div>
+        <button class="btn" type="submit">Generate Recommendation List</button>
+    </form>
+</div>
+
+{% if stats %}
+<div class="card">
+    <h3>Statistical Overview</h3>
+    <p>Number of eligible high-rated movies: <strong>{{ stats.movie_count }}</strong></p>
+    <p>The average rating of these movies is approximately: <strong>{{ "%.2f"|format(stats.avg_rating) }}</strong></p>
+</div>
+{% endif %}
+
+{% if movies %}
+<div class="card">
+    <h3>Recommended Movies List</h3>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Vote Count</th>
+            <th>Popularity</th>
+            <th>Language</th>
+        </tr>
+        {% for m in movies %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ m["title"] }}</td>
+            <td>{{ "%.1f"|format(m["vote_average"]) if m["vote_average"] is not none else "N/A" }}</td>
+            <td>{{ m["vote_count"] or 0 }}</td>
+            <td>{{ "%.1f"|format(m["popularity"]) if m["popularity"] is not none else "N/A" }}</td>
+            <td>{{ m["original_language"] or "-" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+
+{% if report_text %}
+<div class="card">
+    <h3>Automatically Generated English Recommendation Report</h3>
+    <pre>{{ report_text }}</pre>
+</div>
+{% endif %}
+{% endblock %}

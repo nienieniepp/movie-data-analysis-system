@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-3">Report Details #{{ report['id'] }}</h2>
+
+<ul class="list-group mb-3">
+    <li class="list-group-item"><strong>Generation Time：</strong> {{ report['generated_at'] }}</li>
+    <li class="list-group-item"><strong>Format：</strong> {{ report['format'] }}</li>
+    <li class="list-group-item"><strong>Template Name：</strong> {{ report['template_name'] or 'N/A' }}</li>
+    <li class="list-group-item"><strong>Parameters：</strong> {{ report['parameters'] }}</li>
+</ul>
+
+<div class="border rounded bg-white p-3">
+    {{ report['content']|safe }}
+</div>
+
+<a href="{{ url_for('reports_list') }}" class="btn btn-secondary mt-3">Return to Report List</a>
+{% endblock %}

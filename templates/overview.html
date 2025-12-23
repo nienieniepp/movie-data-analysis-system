@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">A. Overall Data Overview</h2>
+
+<!-- Data Overview Card Group -->
+<div class="row mb-4">
+    <div class="col-md-3 mb-3">
+        <div class="card h-100 shadow-sm border-primary">
+            <div class="card-body text-center">
+                <i class="bi bi-film fs-1 text-primary mb-2"></i>
+                <h5 class="card-title">Total Movies</h5>
+                <p class="card-text display-4">{{ total_movies }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card h-100 shadow-sm border-success">
+            <div class="card-body text-center">
+                <i class="bi bi-globe fs-1 text-success mb-2"></i>
+                <h5 class="card-title">Language Types</h5>
+                <p class="card-text display-4">{{ language_count }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card h-100 shadow-sm border-info">
+            <div class="card-body text-center">
+                <i class="bi bi-star fs-1 text-info mb-2"></i>
+                <h5 class="card-title">Average Rating</h5>
+                <p class="card-text display-4">{{ "%.2f"|format(avg_rating) }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <div class="card h-100 shadow-sm border-warning">
+            <div class="card-body text-center">
+                <i class="bi bi-fire fs-1 text-warning mb-2"></i>
+                <h5 class="card-title">Average Popularity</h5>
+                <p class="card-text display-4">{{ "%.2f"|format(avg_popularity) }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Data Distribution Charts -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-header bg-light">
+        <h3 class="mb-0">Movie Data Distribution</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>Rating Distribution</h5>
+                <div class="chart-container" style="height: 250px;">
+                    <canvas id="ratingChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h5>Language Distribution (Top 5)</h5>
+                <div class="chart-container" style="height: 250px;">
+                    <canvas id="languageChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popular Movies Table -->
+<div class="card mb-4 shadow-sm">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+        <h3 class="mb-0">Currently Most Popular Movies</h3>
+        <a href="{{ url_for('hot_topn') }}" class="btn btn-sm btn-outline-primary">
+            <i class="bi bi-filter"></i> View More
+        </a>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead class="table-light">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Average Rating</th>
+                <th>Popularity</th>
+                <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in top5 %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ row["title"] }}</td>
+                    <td>
+                        <span class="badge bg-{% if row['vote_average'] >= 8 %}success{% elif row['vote_average'] >= 6 %}warning{% else %}danger{% endif %}">
+                            {{ "%.1f"|format(row["vote_average"]) if row["vote_average"] is not none else "N/A" }}
+                        </span>
+                    </td>
+                    <td>{{ "%.1f"|format(row["popularity"]) if row["popularity"] is not none else "N/A" }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal"
+                                data-bs-target="#movieModal{{ loop.index }}">
+                            <i class="bi bi-info-circle"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- Movie Details Modal -->
+                <div class="modal fade" id="movieModal{{ loop.index }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">{{ row["title"] }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><strong>Rating:</strong> {{ "%.1f"|format(row["vote_average"]) if row["vote_average"] is not none else "N/A" }}</p>
+                                <p><strong>Popularity:</strong> {{ "%.1f"|format(row["popularity"]) if row["popularity"] is not none else "N/A" }}</p>
+                                <!-- More movie detail fields can be added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% if report_text %}
+<div class="card shadow-sm">
+    <div class="card-header bg-light">
+        <h3 class="mb-0">Automatically Generated English Business Report</h3>
+    </div>
+    <div class="card-body">
+        <pre class="bg-light p-3 rounded">{{ report_text }}</pre>
+    </div>
+</div>
+{% endif %}
+
+<!-- Import Chart.js and Bootstrap Icons -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<script>
+    // Rating Distribution Chart
+    const ratingCtx = document.getElementById('ratingChart').getContext('2d');
+    new Chart(ratingCtx, {
+        type: 'bar',
+        data: {
+            labels: ['0-2', '2-4', '4-6', '6-8', '8-10'],
+            datasets: [{
+                label: 'Number of Movies',
+                data: [35, 128, 452, 328, 156], // Sample data
+                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+    // Language Distribution Chart
+    const langCtx = document.getElementById('languageChart').getContext('2d');
+    new Chart(langCtx, {
+        type: 'pie',
+        data: {
+            labels: ['English', 'Spanish', 'French', 'German', 'Others'],
+            datasets: [{
+                data: [65, 15, 10, 5, 5], // Sample data
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.7)',
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(255, 206, 86, 0.7)',
+                    'rgba(75, 192, 192, 0.7)',
+                    'rgba(153, 102, 255, 0.7)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+</script>
+{% endblock %}

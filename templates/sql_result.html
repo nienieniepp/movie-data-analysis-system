@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-3">SQL Query: {{ name }}</h2>
+
+<div class="mb-3">
+    <label class="form-label">SQL Content</label>
+    <pre class="bg-light p-2 border rounded">{{ sql_text }}</pre>
+</div>
+
+<form method="post" class="mb-3">
+    {% if "?" in sql_text %}
+        <label class="form-label">Parameter Value (will be reused as needed)</label>
+        <input type="text" name="param" class="form-control" placeholder="Please enter parameter">
+        <small class="text-muted">Note: If there are multiple ? in the SQL, this parameter value will be used repeatedly.</small>
+    {% else %}
+        <p class="text-muted">This SQL does not require parameters, just click Run Query.</p>
+    {% endif %}
+    <button type="submit" class="btn btn-primary mt-2">Run Query</button>
+    <a href="{{ url_for('sql_list') }}" class="btn btn-secondary mt-2">Return to SQL List</a>
+</form>
+
+{% if error %}
+<div class="alert alert-danger">
+    Execution error: {{ error }}
+</div>
+{% endif %}
+
+{% if rows %}
+<h5>Query Results</h5>
+<table class="table table-sm table-striped align-middle">
+    <thead>
+    <tr>
+        {% for col in col_names %}
+            <th>{{ col }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for r in rows %}
+        <tr>
+            {% for col in col_names %}
+                <td>{{ r[col] }}</td>
+            {% endfor %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

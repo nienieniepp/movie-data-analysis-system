@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-3">{{ title }}</h2>
+
+<div class="border rounded bg-white p-3">
+    {{ report_html|safe }}
+</div>
+
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Return to Homepage</a>
+{% endblock %}

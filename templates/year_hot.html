@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>B2. Annual Popular Movies Summary Report</h2>
+
+<div class="card">
+    <form method="post">
+        <div class="form-row">
+            <label>Year:</label>
+            <input type="number" name="year" value="{{ params.year or '' }}" placeholder="e.g. 2023">
+        </div>
+        <div class="form-row">
+            <label>Top N:</label>
+            <input type="number" name="n" min="1" max="50" value="{{ params.n or 10 }}">
+        </div>
+        <button class="btn" type="submit">Generate Report</button>
+    </form>
+</div>
+
+{% if summary %}
+<div class="card">
+    <h3>Overall Performance of Movies in {{ params.year }}</h3>
+    <p>The system contains a total of <strong>{{ summary.movie_count }}</strong> movies for this year.</p>
+    <p>The average rating is approximately <strong>{{ "%.2f"|format(summary.avg_rating) }}</strong>, and the average popularity score is approximately <strong>{{ "%.2f"|format(summary.avg_popularity) }}</strong>.</p>
+</div>
+{% endif %}
+
+{% if top_movies %}
+<div class="card">
+    <h3>Top {{ params.n }} Popular Movies of {{ params.year }}</h3>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Rating</th>
+            <th>Popularity</th>
+            <th>Release Date</th>
+        </tr>
+        {% for m in top_movies %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ m["title"] }}</td>
+            <td>{{ "%.1f"|format(m["vote_average"]) if m["vote_average"] is not none else "N/A" }}</td>
+            <td>{{ "%.1f"|format(m["popularity"]) if m["popularity"] is not none else "N/A" }}</td>
+            <td>{{ m["release_date"] or "-" }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endif %}
+
+{% if report_text %}
+<div class="card">
+    <h3>Automatically Generated English Annual Summary Report</h3>
+    <pre>{{ report_text }}</pre>
+</div>
+{% endif %}
+{% endblock %}

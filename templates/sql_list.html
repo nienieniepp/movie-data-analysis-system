@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Saved SQL Queries</h2>
+
+<table class="table table-sm table-striped align-middle">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for q in queries %}
+        <tr>
+            <td>{{ q['id'] }}</td>
+            <td>{{ q['name'] }}</td>
+            <td>{{ q['description'] }}</td>
+            <td>
+                <a href="{{ url_for('sql_run', query_id=q['id']) }}" class="btn btn-sm btn-primary">
+                    View / Run
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

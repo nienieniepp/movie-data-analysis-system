@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">C2. High-Rated but Low-Popularity Movie Report (Potential Films)</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Minimum Rating (Default 8.0)</label>
+        <input type="text" name="min_rating" class="form-control" value="8.0">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Maximum Popularity (Default 200, lower means "more niche")</label>
+        <input type="text" name="max_popularity" class="form-control" value="200">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Generate English Report</button>
+    <a href="{{ url_for('rec_menu') }}" class="btn btn-secondary">Return to C Menu</a>
+</form>
+{% endblock %}

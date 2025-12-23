@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">B1. Generate Top N Popular Movies Report</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Time Range Type</label>
+        <select name="time_type" class="form-select">
+            <option value="all">Unlimited time (all movies)</option>
+            <option value="year">By year</option>
+            <option value="range">By date range</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Year (only used for "By year", e.g. 2023)</label>
+        <input type="text" name="year" class="form-control" placeholder="2023">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Start date (only used for "By date range", YYYY-MM-DD)</label>
+        <input type="text" name="start_date" class="form-control" placeholder="2023-01-01">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">End date (only used for "By date range", YYYY-MM-DD)</label>
+        <input type="text" name="end_date" class="form-control" placeholder="2023-12-31">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Top N Quantity</label>
+        <input type="number" name="n" class="form-control" value="10" min="1">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Generate English Report</button>
+    <a href="{{ url_for('hot_menu') }}" class="btn btn-secondary">Return to B Menu</a>
+</form>
+{% endblock %}

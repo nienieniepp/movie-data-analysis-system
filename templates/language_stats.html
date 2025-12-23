@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">D1. Movie Count and Average Rating by Language</h2>
+
+<h5>Chinese Chart View</h5>
+<table class="table table-sm table-striped align-middle">
+    <thead>
+    <tr>
+        <th>Language Code</th>
+        <th>Number of Movies</th>
+        <th>Average Rating</th>
+        <th>Average Popularity</th>
+        <th>Total Votes</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for row in stats %}
+        <tr>
+            <td>{{ row['original_language'] or 'N/A' }}</td>
+            <td>{{ row['movie_count'] }}</td>
+            <td>{{ '%.2f'|format(row['avg_rating']) if row['avg_rating'] is not none else 'N/A' }}</td>
+            <td>{{ '%.2f'|format(row['avg_popularity']) if row['avg_popularity'] is not none else 'N/A' }}</td>
+            <td>{{ row['total_votes'] or 0 }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<hr>
+<h5 class="mt-3">English Report (Auto-generated)</h5>
+<div class="border rounded p-3 bg-white">
+    {{ report_html|safe }}
+</div>
+
+<a href="{{ url_for('structure_menu') }}" class="btn btn-secondary mt-3">Return to D Menu</a>
+{% endblock %}

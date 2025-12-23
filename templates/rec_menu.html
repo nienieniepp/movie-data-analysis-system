@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- 标题区域强化 -->
+<div class="mb-6 bg-gradient-to-r from-primary/5 to-success/5 p-4 rounded-3 shadow-sm">
+    <div class="d-flex align-items-center gap-3">
+        <div class="bg-white p-3 rounded-circle shadow-sm">
+            <i class="bi bi-film text-primary fs-2"></i>
+        </div>
+        <div>
+            <h2 class="mb-1 fw-bold">C. Content Recommendation and Selection Decision</h2>
+            <p class="text-muted small">Intelligent screening based on film data, generating accurate recommendations and potential content reports to assist in selection decisions</p>
+        </div>
+    </div>
+</div>
+
+<!-- 功能卡片区域 -->
+<div class="row gap-6">
+    <!-- 高评分影片推荐报告 -->
+    <div class="col-md-6">
+        <a href="{{ url_for('high_rated') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-primary rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <!-- 卡片头部 -->
+                <div class="card-header bg-primary/10 border-bottom border-primary">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-star-fill text-primary fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">1. High-Rated Film Recommendation Report</h5>
+                    </div>
+                </div>
+
+                <!-- 卡片内容 -->
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <p class="text-muted">
+                            Supports custom rating thresholds (e.g., 8.0+/10) and language filtering conditions to generate a list of high-quality films that meet the criteria, which can be sorted by rating/popularity.
+                        </p>
+                    </div>
+
+                    <!-- 功能亮点标签 -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-primary text-white px-3 py-1">
+                            <i class="bi bi-filter me-1"></i> Multi-condition Filtering
+                        </span>
+                        <span class="badge bg-primary text-white px-3 py-1">
+                            <i class="bi bi-sort-amount-up me-1"></i> Intelligent Sorting
+                        </span>
+                        <span class="badge bg-primary text-white px-3 py-1">
+                            <i class="bi bi-file-earmark-text me-1"></i> Report Export
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 底部引导 -->
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-primary fw-medium">View Details <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 潜力影片报告 -->
+    <div class="col-md-6">
+        <a href="{{ url_for('potential') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-success rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <!-- 卡片头部 -->
+                <div class="card-header bg-success/10 border-bottom border-success">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-graph-up-arrow text-success fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">2. Potential Film Report</h5>
+                    </div>
+                </div>
+
+                <!-- 卡片内容 -->
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <p class="text-muted">
+                            The algorithm identifies films with high ratings (≥7.5/10) but low viewership/discussion, uncovering high-quality content that has not received sufficient attention to assist in content acquisition decisions.
+                        </p>
+                    </div>
+
+                    <!-- 功能亮点标签 -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-success text-white px-3 py-1">
+                            <i class="bi bi-eye-slash me-1"></i> Low Attention
+                        </span>
+                        <span class="badge bg-success text-white px-3 py-1">
+                            <i class="bi bi-trending-up me-1"></i> High Potential Prediction
+                        </span>
+                        <span class="badge bg-success text-white px-3 py-1">
+                            <i class="bi bi-lightbulb me-1"></i> Decision Support
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 底部引导 -->
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-success fw-medium">View Details <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- 底部装饰 -->
+<div class="mt-8 flex items-center">
+    <div class="flex-grow-1 h-px bg-primary/20"></div>
+    <div class="mx-4 bg-white p-2 rounded-full shadow-sm">
+        <i class="bi bi-compass text-success/70"></i>
+    </div>
+    <div class="flex-grow-1 h-px bg-success/20"></div>
+</div>
+{% endblock %}

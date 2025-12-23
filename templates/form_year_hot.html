@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">B2. Generate a Summary Report of Popular Movies for a Specific Year</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Year</label>
+        <input type="text" name="year" class="form-control" placeholder="e.g.: 2023">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Top N Quantity</label>
+        <input type="number" name="n" class="form-control" value="10" min="1">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Generate English Report</button>
+    <a href="{{ url_for('hot_menu') }}" class="btn btn-secondary">Return to B Menu</a>
+</form>
+{% endblock %}

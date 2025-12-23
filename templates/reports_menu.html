@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- 标题区域强化 -->
+<div class="mb-6 bg-gradient-to-r from-indigo-50 to-blue-50 p-4 rounded-3 shadow-sm">
+    <div class="d-flex align-items-center gap-3">
+        <div class="bg-white p-3 rounded-circle shadow-sm">
+            <i class="bi bi-file-text text-indigo-600 fs-2"></i>
+        </div>
+        <div>
+            <h2 class="mb-1 fw-bold">E. Reports & Templates / SQL Management</h2>
+            <p class="text-muted small">Manage historical reports, report templates and SQL queries, supporting view and run operations</p>
+        </div>
+    </div>
+</div>
+
+<!-- 功能卡片区域 -->
+<div class="row gap-6">
+    <!-- 历史报告列表 -->
+    <div class="col-md-4">
+        <a href="{{ url_for('reports_list') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-indigo-500 rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <!-- 卡片头部 -->
+                <div class="card-header bg-indigo-50 border-bottom border-indigo-500">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-file-earmark-text text-indigo-600 fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">1. Historical Reports List</h5>
+                    </div>
+                </div>
+
+                <!-- 卡片内容 -->
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <p class="text-muted">
+                            View all generated report records, support filtering by time/type, and re-view or export report content.
+                        </p>
+                    </div>
+
+                    <!-- 功能亮点标签 -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-indigo-600 text-white px-3 py-1">
+                            <i class="bi bi-clock-history me-1"></i> Time Filtering
+                        </span>
+                        <span class="badge bg-indigo-600 text-white px-3 py-1">
+                            <i class="bi bi-download me-1"></i> Export
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 底部引导 -->
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-indigo-600 fw-medium">View Details <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 报告模板列表 -->
+    <div class="col-md-4">
+        <a href="{{ url_for('templates_list') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-blue-500 rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <!-- 卡片头部 -->
+                <div class="card-header bg-blue-50 border-bottom border-blue-500">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-file-earmark-text-fill text-blue-600 fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">2. Report Templates List</h5>
+                    </div>
+                </div>
+
+                <!-- 卡片内容 -->
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <p class="text-muted">
+                            Manage preset report templates, support quick generation of new reports based on templates, and view template details and configurations.
+                        </p>
+                    </div>
+
+                    <!-- 功能亮点标签 -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-blue-600 text-white px-3 py-1">
+                            <i class="bi bi-files me-1"></i> Template Reuse
+                        </span>
+                        <span class="badge bg-blue-600 text-white px-3 py-1">
+                            <i class="bi bi-sliders me-1"></i> Configuration View
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 底部引导 -->
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-blue-600 fw-medium">View Details <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- SQL查询管理 -->
+    <div class="col-md-4">
+        <a href="{{ url_for('sql_list') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-teal-500 rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <!-- 卡片头部 -->
+                <div class="card-header bg-teal-50 border-bottom border-teal-500">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-database text-teal-600 fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">3. SQL Query Management</h5>
+                    </div>
+                </div>
+
+                <!-- 卡片内容 -->
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <p class="text-muted">
+                            View saved SQL query statements, support directly running queries and viewing results, assisting in data extraction and analysis.
+                        </p>
+                    </div>
+
+                    <!-- 功能亮点标签 -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-teal-600 text-white px-3 py-1">
+                            <i class="bi bi-play-circle me-1"></i> Run Query
+                        </span>
+                        <span class="badge bg-teal-600 text-white px-3 py-1">
+                            <i class="bi bi-table me-1"></i> View Results
+                        </span>
+                    </div>
+                </div>
+
+                <!-- 底部引导 -->
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-teal-600 fw-medium">View Details <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- 底部装饰 -->
+<div class="mt-8 flex items-center">
+    <div class="flex-grow-1 h-px bg-indigo-100"></div>
+    <div class="mx-4 bg-white p-2 rounded-full shadow-sm">
+        <i class="bi bi-file-text text-blue-500/70"></i>
+    </div>
+    <div class="flex-grow-1 h-px bg-teal-100"></div>
+</div>
+{% endblock %}

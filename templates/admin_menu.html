@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- 标题区域强化 -->
+<div class="mb-6 bg-gradient-to-r from-slate-50 to-gray-50 p-4 rounded-3 shadow-sm">
+    <div class="d-flex align-items-center gap-3">
+        <div class="bg-white p-3 rounded-circle shadow-sm">
+            <i class="bi bi-gear text-slate-700 fs-2"></i>
+        </div>
+        <div>
+            <h2 class="mb-1 fw-bold">F. System Platform and Data Maintenance</h2>
+            <p class="text-muted small">Manage database structure, data import and system initialization, supporting core administrator operations</p>
+        </div>
+    </div>
+</div>
+
+<!-- 功能卡片区域 -->
+<div class="row gap-6">
+    <!-- 1. 初始化数据库结构 -->
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('admin_init') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-slate-600 rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <div class="card-header bg-slate-50 border-bottom border-slate-600">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-database-gear text-slate-700 fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">1. Initialize Database Structure</h5>
+                    </div>
+                </div>
+                <div class="card-body p-5">
+                    <p class="text-muted mb-4">
+                        Create or reset database table structure, initialize basic configurations, suitable for first-time system deployment or structural adjustments.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-slate-600 text-white px-3 py-1">
+                            <i class="bi bi-code-slash me-1"></i> Structure Reset
+                        </span>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-slate-700 fw-medium">Operate <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 2. 从CSV导入电影数据 -->
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('admin_import') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-amber-600 rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <div class="card-header bg-amber-50 border-bottom border-amber-600">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-filetype-csv text-amber-700 fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">2. Import Movie Data from CSV</h5>
+                    </div>
+                </div>
+                <div class="card-body p-5">
+                    <p class="text-muted mb-4">
+                        Upload CSV file to batch import movie data. This operation will clear existing data, suitable for complete data replacement.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-amber-600 text-white px-3 py-1">
+                            <i class="bi bi-eraser me-1"></i> Clear Original Data
+                        </span>
+                        <span class="badge bg-amber-600 text-white px-3 py-1">
+                            <i class="bi bi-upload me-1"></i> Batch Import
+                        </span>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-amber-700 fw-medium">Operate <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 3. 插入默认模板和SQL -->
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('admin_insert_defaults') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-emerald-600 rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <div class="card-header bg-emerald-50 border-bottom border-emerald-600">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-file-earmark-plus text-emerald-700 fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">3. Insert Default Templates and SQL</h5>
+                    </div>
+                </div>
+                <div class="card-body p-5">
+                    <p class="text-muted mb-4">
+                        Import system-preset report templates and SQL query statements to quickly initialize function configurations.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-emerald-600 text-white px-3 py-1">
+                            <i class="bi bi-files me-1"></i> Template Presets
+                        </span>
+                        <span class="badge bg-emerald-600 text-white px-3 py-1">
+                            <i class="bi bi-database-plus me-1"></i> SQL Import
+                        </span>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-emerald-700 fw-medium">Operate <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 4. 手动新增电影记录 -->
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('admin_add_movie') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-blue-600 rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <div class="card-header bg-blue-50 border-bottom border-blue-600">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-plus-circle text-blue-700 fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">4. Manually Add Movie Record</h5>
+                    </div>
+                </div>
+                <div class="card-body p-5">
+                    <p class="text-muted mb-4">
+                        Manually add a single movie record through a form, supporting detailed information entry (rating, language, release date, etc.).
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-blue-600 text-white px-3 py-1">
+                            <i class="bi bi-pencil me-1"></i> Single Entry
+                        </span>
+                        <span class="badge bg-blue-600 text-white px-3 py-1">
+                            <i class="bi bi-list-check me-1"></i> Detailed Info
+                        </span>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-blue-700 fw-medium">Operate <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- 5. 批量导入电影数据（追加） -->
+    <div class="col-md-6 col-lg-4">
+        <a href="{{ url_for('admin_bulk_import') }}" class="text-decoration-none text-dark">
+            <div class="card h-100 border-2 border-purple-600 rounded-4 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1">
+                <div class="card-header bg-purple-50 border-bottom border-purple-600">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-filetype-csv text-purple-700 fs-5"></i>
+                        <h5 class="card-title mb-0 fw-semibold">5. Bulk Import Movie Data (Append)</h5>
+                    </div>
+                </div>
+                <div class="card-body p-5">
+                    <p class="text-muted mb-4">
+                        Upload CSV file to batch append movie data, retaining existing data, suitable for incremental update scenarios.
+                    </p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="badge bg-purple-600 text-white px-3 py-1">
+                            <i class="bi bi-layer-group me-1"></i> Append Mode
+                        </span>
+                        <span class="badge bg-purple-600 text-white px-3 py-1">
+                            <i class="bi bi-upload me-1"></i> Batch Update
+                        </span>
+                    </div>
+                </div>
+                <div class="card-footer bg-transparent border-0 p-4 pt-0 text-end">
+                    <span class="text-purple-700 fw-medium">Operate <i class="bi bi-arrow-right ms-1"></i></span>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- 管理员提示 -->
+<div class="mt-6 p-3 bg-amber-50 border border-amber-200 rounded-3">
+    <p class="text-muted mb-0 d-flex align-items-start">
+        <i class="bi bi-exclamation-triangle text-amber-600 mt-1 me-2"></i>
+        <span>Module F is for administrator use only. Operations involve data structure changes and batch processing. It is recommended to operate import and initialization functions with caution, and back up data if necessary.</span>
+    </p>
+</div>
+
+<!-- 底部装饰 -->
+<div class="mt-8 flex items-center">
+    <div class="flex-grow-1 h-px bg-slate-200"></div>
+    <div class="mx-4 bg-white p-2 rounded-full shadow-sm">
+        <i class="bi bi-shield-lock text-slate-600/70"></i>
+    </div>
+    <div class="flex-grow-1 h-px bg-slate-200"></div>
+</div>
+{% endblock %}
